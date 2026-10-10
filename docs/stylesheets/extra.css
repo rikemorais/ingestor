@@ -1,0 +1,10 @@
+/* Project-specific tweaks on top of Material for MkDocs. */
+
+:root {
+  --md-admonition-icon--note: var(--md-admonition-icon--abstract);
+}
+
+/* Slightly wider content column for code and tables. */
+.md-grid {
+  max-width: 68rem;
+}
