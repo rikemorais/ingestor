@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'Fira Code', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "explorer.compactFolders": false,
   "makefile.configureOnOpen": false,
