@@ -1,0 +1,19 @@
+# Python Files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual Environment
+.venv
+
+# Environment Variables
+.env
+
+# Archify Working Folders
+.archify/
+
+# MkDocs Build Output
+site/
