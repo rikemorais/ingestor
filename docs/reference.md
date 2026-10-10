@@ -45,3 +45,14 @@ Generated automatically from the code's docstrings.
 ::: ingestor.adapters.sse.source.SSESource
 
 ::: ingestor.adapters.ws.source.WebSocketSource
+
+## Testing utilities
+
+In-memory doubles for testing a pipeline without Kafka or Docker, usable in your
+own project (`from ingestor.testing import ...`).
+
+::: ingestor.testing.ListSource
+
+::: ingestor.testing.MemorySink
+
+::: ingestor.testing.FakeConnection

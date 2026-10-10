@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help install sync reinstall run test up stop logs ps wiki btc batch custom micro-batch bridge docs-serve docs-build docs-deploy clean
+.PHONY: help install sync reinstall run test up stop logs ps wiki btc batch custom micro-batch bridge consume-btc docs-serve docs-build docs-deploy clean
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -38,7 +38,7 @@ btc:
 	PYTHONPATH=src uv run --extra ws python examples/bitcoin_stream.py
 
 batch:
-	PYTHONPATH=src uv run python examples/batch_file.py
+	PYTHONPATH=src uv run python examples/batch_file.py $(FILE)
 
 custom:
 	PYTHONPATH=src uv run python examples/custom_adapter.py
@@ -47,7 +47,10 @@ micro-batch:
 	PYTHONPATH=src uv run python examples/micro_batch.py
 
 bridge:
-	PYTHONPATH=src uv run --extra ws python examples/stream_to_kafka.py
+	PYTHONPATH=src uv run --extra ws python examples/stream_to_kafka.py $(N)
+
+consume-btc:
+	PYTHONPATH=src uv run python examples/consume_btc_ticks.py
 
 docs-serve:
 	uv run --group docs mkdocs serve

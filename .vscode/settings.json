@@ -1,4 +1,37 @@
 {
   "explorer.compactFolders": false,
-  "makefile.configureOnOpen": false
+  "makefile.configureOnOpen": false,
+  "cSpell.words": [
+    "Ccircle",
+    "Cpath",
+    "Crect",
+    "Csvg",
+    "enwiktionary",
+    "Etampes",
+    "explorable",
+    "frwiki",
+    "fsrc",
+    "glightbox",
+    "httpx",
+    "inlinehilite",
+    "kout",
+    "ksink",
+    "ksrc",
+    "messagebus",
+    "mkdocstrings",
+    "neighbouring",
+    "pannable",
+    "Pudox",
+    "rasterizes",
+    "rescoping",
+    "sandboxed",
+    "SASL",
+    "Songti",
+    "sublabel",
+    "tasklist",
+    "timeslice",
+    "unimportable",
+    "Victar",
+    "wikidatawiki"
+  ]
 }

@@ -5,7 +5,7 @@ Every feature has a runnable script in `examples/`. Each one uses the same
 
 | Command | What it shows | Needs |
 |---|---|---|
-| `make batch` | Batch: read a file line by line | - |
+| `make batch FILE=<path>` | Batch: read a file line by line | - |
 | `make custom` | Write your own Source and Sink | - |
 | `make micro-batch` | Process a stream in fixed-size windows | - |
 | `make run` | Streaming with Kafka (produce + consume) | Kafka |
@@ -16,9 +16,14 @@ Every feature has a runnable script in `examples/`. Each one uses the same
 The live streams (`wiki`, `btc`) run continuously and reconnect on drops; stop
 them with Ctrl+C. The others are finite and stop on their own.
 
-## Batch (`make batch`)
+## Batch (`make batch FILE=<path>`)
 
-`FileSource` reads a text file, one `Record` per line, into `ConsoleSink`.
+`FileSource` reads a text file, one `Record` per line, into `ConsoleSink`. A file
+path is required; running it without one prints a usage error:
+
+```bash
+make batch FILE=/path/to/your.txt
+```
 
 ## Write your own (`make custom`)
 
@@ -57,7 +62,8 @@ them, and the data each one returns.
 
 Reads the live Coinbase BTC-USD stream and produces each tick into a Kafka topic.
 This is the real use for a broker: capture a live stream durably so other
-consumers can read it (and replay it) later. Round trip:
+consumers can read it (and replay it) later. It runs continuously (Ctrl+C to
+stop); pass `make bridge N=100` to stop after N messages instead. Round trip:
 
 ```text
 Coinbase WebSocket --(WebSocketSource)--> ingest --(KafkaSink)--> Kafka topic
