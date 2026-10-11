@@ -1,4 +1,4 @@
-# Donos de código do repositório.
-# Toda pull request pede revisão do dono; e, com a revisão de code owners
-# ativada na proteção de branch, exige a aprovação dele para mesclar.
+# Code owners for the whole repository.
+# Every pull request requests a review from the owner; with code owner reviews
+# enabled in branch protection, it also requires their approval to merge.
 * @rikemorais
