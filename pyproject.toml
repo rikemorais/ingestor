@@ -2,6 +2,7 @@
 name = "data-ingestor"
 dynamic = ["version"]
 description = "Data ingestion (streaming, batch, micro-batch) with a ports-and-adapters architecture"
+readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "confluent-kafka>=2.15.0",
