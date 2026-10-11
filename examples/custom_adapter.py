@@ -20,13 +20,16 @@ class RangeSource:
     """A tiny custom Source that yields a few numbered records."""
 
     def __init__(self, count: int) -> None:
+        """Store the example configuration."""
         self._count = count
 
     def read(self) -> Iterator[Record]:
+        """Yield the example records."""
         for i in range(1, self._count + 1):
             yield Record(value=f"item {i}", key=str(i), origin="range")
 
     def close(self) -> None:
+        """Release any resources."""
         pass
 
 
@@ -34,21 +37,26 @@ class UpperCaseSink:
     """A tiny custom Sink that prints each value in upper case."""
 
     def __init__(self) -> None:
+        """Store the example configuration."""
         self.written = 0
 
     def write(self, record: Record) -> None:
+        """Handle the record."""
         print(record.value.upper())
         self.written += 1
 
     def close(self) -> None:
+        """Release any resources."""
         print(f"(sink closed after {self.written} records)")
 
 
 def run() -> int:
+    """Build the pipeline and run the ingestion."""
     return ingest(RangeSource(5), UpperCaseSink())
 
 
 def main() -> None:
+    """Run the example from the command line."""
     run()
 
 

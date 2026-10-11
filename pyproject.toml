@@ -50,11 +50,10 @@ convention = "pep257"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D"] # tests do not require docstrings
-"examples/**" = ["D"] # runnable demos, not library API
 
 [tool.interrogate]
 fail-under = 100
-exclude = ["tests", "examples", "docs"]
+exclude = ["tests", "docs"]
 ignore-init-module = false
 verbose = 1
 
