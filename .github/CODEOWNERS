@@ -1,0 +1,4 @@
+# Donos de código do repositório.
+# Toda pull request pede revisão do dono; e, com a revisão de code owners
+# ativada na proteção de branch, exige a aprovação dele para mesclar.
+* @rikemorais
