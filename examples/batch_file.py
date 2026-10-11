@@ -16,10 +16,12 @@ from ingestor.app import ingest
 
 
 def run(path: Path) -> int:
+    """Build the pipeline and run the ingestion."""
     return ingest(FileSource(path), ConsoleSink())
 
 
 def main() -> None:
+    """Run the example from the command line."""
     if len(sys.argv) < 2:
         print("Error: No Input File Given!!!", file=sys.stderr)
         print("Usage: make batch FILE=<path>", file=sys.stderr)
