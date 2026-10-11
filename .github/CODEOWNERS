@@ -1,4 +1,0 @@
-# Code owners for the whole repository.
-# Every pull request requests a review from the owner; with code owner reviews
-# enabled in branch protection, it also requires their approval to merge.
-* @rikemorais
