@@ -26,15 +26,12 @@ def main() -> int:
         Process exit code: ``0`` on success, ``1`` if Kafka cannot be reached.
     """
     server = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
-    connection = KafkaConnection(
-        KafkaConnectionInfo(brokers=server.split(","), topics=[TOPIC])
-    )
+    connection = KafkaConnection(KafkaConnectionInfo(brokers=server.split(","), topics=[TOPIC]))
     try:
         info = connection.connect()
         if info.broker_count == 0:
             print(
-                "No Kafka brokers reachable. Is Kafka running? "
-                "Start it with: docker compose up -d",
+                "No Kafka brokers reachable. Is Kafka running? Start it with: docker compose up -d",
                 file=sys.stderr,
             )
             return 1
@@ -43,9 +40,7 @@ def main() -> int:
         # (demo) seed a few records into the topic
         kafka_sink = connection.sink()
         for i in range(1, 6):
-            kafka_sink.write(
-                Record(value=f"Hello Kafka #{i}", key=str(i), origin=TOPIC)
-            )
+            kafka_sink.write(Record(value=f"Hello Kafka #{i}", key=str(i), origin=TOPIC))
         kafka_sink.close()
 
         # ingest from Kafka to the console

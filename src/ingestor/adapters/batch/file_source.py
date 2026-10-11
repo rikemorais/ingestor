@@ -5,6 +5,7 @@ Shows batch entering the system without touching ``ingest``: just another Source
 
 from collections.abc import Iterator
 from pathlib import Path
+from typing import TextIO
 
 from ingestor.ports.record import Record
 
@@ -21,7 +22,7 @@ class FileSource:
         """
         self._path = Path(path)
         self._encoding = encoding
-        self._file = None
+        self._file: TextIO | None = None
 
     def read(self) -> Iterator[Record]:
         """Open the file and yield one record per line.

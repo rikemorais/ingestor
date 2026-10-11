@@ -1,4 +1,4 @@
-"""Ingestor: reads data from many sources (streaming, batch, micro-batch) and writes it to destinations.
+"""Ingestor: read records from sources (streaming, batch, micro-batch) and write them to sinks.
 
 Organized as ports & adapters:
 - `ports`: Source, Sink, Connection and the Record domain model.

@@ -10,7 +10,7 @@ import sys
 import time
 from collections.abc import Iterator
 
-from websocket import WebSocketException, create_connection
+from websocket import WebSocket, WebSocketException, create_connection
 
 from ingestor.ports.record import Record
 
@@ -45,7 +45,7 @@ class WebSocketSource:
         self._reconnect = reconnect
         self._reconnect_delay = reconnect_delay
         self._running = True
-        self._ws = None
+        self._ws: WebSocket | None = None
 
     def read(self) -> Iterator[Record]:
         """Yield one Record per message, reconnecting on drops.
@@ -82,8 +82,10 @@ class WebSocketSource:
                 self._ws.send(message)
             self._ws.settimeout(None)  # block waiting for pushed messages
             while True:
-                if message := self._ws.recv():
-                    yield Record(value=message, origin=self._origin)
+                frame = self._ws.recv()
+                if frame:
+                    text = frame if isinstance(frame, str) else frame.decode("utf-8", "replace")
+                    yield Record(value=text, origin=self._origin)
         finally:
             if self._ws is not None:
                 self._ws.close()

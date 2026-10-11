@@ -23,3 +23,7 @@ site/
 .coverage.*
 htmlcov/
 .pytest_cache/
+
+# Tool caches
+.mypy_cache/
+.ruff_cache/

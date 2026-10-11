@@ -60,11 +60,10 @@ def consumer_factory(polls):
 
 # --------------------------- KafkaSource ---------------------------
 
+
 def test_source_yields_decoded_records(monkeypatch):
     polls = [FakeMessage(value=b"hello", key=b"1", topic="t")]
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory(polls)
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory(polls))
     source = KafkaSource(topics=["t"], max_empty_polls=1)
     records = list(source.read())
     assert records == [Record(value="hello", key="1", origin="t")]
@@ -73,45 +72,35 @@ def test_source_yields_decoded_records(monkeypatch):
 
 def test_source_handles_none_value_and_key(monkeypatch):
     polls = [FakeMessage(value=None, key=None, topic="t")]
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory(polls)
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory(polls))
     source = KafkaSource(topics=["t"], max_empty_polls=1)
     (record,) = list(source.read())
     assert record.value == "" and record.key is None
 
 
 def test_source_stops_after_empty_polls(monkeypatch):
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory([])
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory([]))
     source = KafkaSource(topics=["t"], max_empty_polls=2)
     assert list(source.read()) == []
 
 
 def test_source_treats_partition_eof_as_quiet(monkeypatch):
     polls = [FakeMessage(error=FakeError(KafkaError._PARTITION_EOF))]
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory(polls)
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory(polls))
     source = KafkaSource(max_empty_polls=1)
     assert list(source.read()) == []
 
 
 def test_source_raises_on_real_error(monkeypatch):
     polls = [FakeMessage(error=FakeError(KafkaError.UNKNOWN))]
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory(polls)
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory(polls))
     source = KafkaSource(max_empty_polls=3)
     with pytest.raises(KafkaException):
         list(source.read())
 
 
 def test_source_offset_reset_and_close(monkeypatch):
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory([])
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory([]))
     earliest = KafkaSource(from_beginning=True)
     latest = KafkaSource(from_beginning=False)
     assert earliest._consumer.config["auto.offset.reset"] == "earliest"
@@ -121,6 +110,7 @@ def test_source_offset_reset_and_close(monkeypatch):
 
 
 # --------------------------- KafkaSink -----------------------------
+
 
 class FakeProducer:
     def __init__(self, config):
@@ -170,6 +160,7 @@ def test_sink_close_flushes(monkeypatch):
 
 # ------------------------- KafkaConnection -------------------------
 
+
 class FakeCluster:
     def __init__(self):
         self.brokers = {1: "b1:9092"}
@@ -185,9 +176,7 @@ class FakeAdmin:
 
 
 def test_connection_connect_summarizes_cluster(monkeypatch):
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.connection.AdminClient", FakeAdmin
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.connection.AdminClient", FakeAdmin)
     conn = KafkaConnection(KafkaConnectionInfo(brokers=["b1:9092", "b2:9092"]))
     info = conn.connect()
     assert info.broker_count == 1
@@ -196,13 +185,9 @@ def test_connection_connect_summarizes_cluster(monkeypatch):
 
 
 def test_connection_builds_source_and_sink(monkeypatch):
-    monkeypatch.setattr(
-        "ingestor.adapters.kafka.source.Consumer", consumer_factory([])
-    )
+    monkeypatch.setattr("ingestor.adapters.kafka.source.Consumer", consumer_factory([]))
     monkeypatch.setattr("ingestor.adapters.kafka.sink.Producer", FakeProducer)
-    conn = KafkaConnection(
-        KafkaConnectionInfo(brokers=["b1:9092"], topics=["t1", "t2"])
-    )
+    conn = KafkaConnection(KafkaConnectionInfo(brokers=["b1:9092"], topics=["t1", "t2"]))
     source = conn.source()
     sink = conn.sink()
     assert isinstance(source, KafkaSource)

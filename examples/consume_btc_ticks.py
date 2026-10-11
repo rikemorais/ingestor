@@ -9,7 +9,6 @@ from ingestor.adapters.console import ConsoleSink
 from ingestor.adapters.kafka import KafkaConnection, KafkaConnectionInfo
 from ingestor.app import ingest
 
-
 TOPIC = "btc-ticks"
 
 
