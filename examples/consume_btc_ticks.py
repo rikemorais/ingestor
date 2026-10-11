@@ -13,6 +13,7 @@ TOPIC = "btc-ticks"
 
 
 def main() -> None:
+    """Run the example from the command line."""
     brokers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
     connection = KafkaConnection(
         KafkaConnectionInfo(

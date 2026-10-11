@@ -10,6 +10,7 @@ class ConsoleSink:
     """
 
     def __init__(self, include_metadata: bool = True) -> None:
+        """Choose whether to print the origin and key alongside the value."""
         self._include_metadata = include_metadata
 
     def write(self, record: Record) -> None:

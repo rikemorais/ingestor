@@ -29,6 +29,7 @@ TOPIC = "btc-ticks"
 
 
 def run(limit: int | None = None) -> int:
+    """Build the pipeline and run the ingestion."""
     connection = KafkaConnection(KafkaConnectionInfo(brokers=["localhost:9092"], topics=[TOPIC]))
     source = WebSocketSource(URL, subscribe=SUBSCRIBE, origin=TOPIC)
     sink = TeeSink(
@@ -41,6 +42,7 @@ def run(limit: int | None = None) -> int:
 
 
 def main() -> None:
+    """Run the example from the command line."""
     limit = int(sys.argv[1]) if len(sys.argv) > 1 else None
 
     if limit is None:

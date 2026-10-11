@@ -20,6 +20,7 @@ class EditPrinter:
     """A Sink that prints a readable one-line summary per Wikimedia event."""
 
     def write(self, record: Record) -> None:
+        """Handle the record."""
         try:
             event = json.loads(record.value)
         except json.JSONDecodeError:
@@ -31,14 +32,17 @@ class EditPrinter:
         print(f"[{wiki}] ({kind}) {title} - by {user}")
 
     def close(self) -> None:
+        """Release any resources."""
         pass
 
 
 def run() -> int:
+    """Build the pipeline and run the ingestion."""
     return ingest(SSESource(STREAM, origin="wikimedia"), EditPrinter())
 
 
 def main() -> None:
+    """Run the example from the command line."""
     print("Streaming live Wikimedia edits... Ctrl+C to stop\n")
     try:
         run()

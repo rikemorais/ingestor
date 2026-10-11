@@ -1,0 +1,35 @@
+# Install once with: uv run pre-commit install
+# Blocks a commit unless lint, types, docstring coverage and test coverage pass.
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --group dev ruff check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --group dev ruff format --check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: interrogate
+        name: interrogate (docstring coverage)
+        entry: uv run --group dev interrogate
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: mypy
+        name: mypy
+        entry: uv run --group dev --extra sse --extra ws mypy src/ingestor
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: pytest
+        name: pytest (coverage gate)
+        entry: uv run --group test --extra sse --extra ws pytest
+        language: system
+        pass_filenames: false
+        always_run: true

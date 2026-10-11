@@ -71,6 +71,7 @@ class SSESource:
                 time.sleep(self._reconnect_delay)
 
     def _stream_once(self) -> Iterator[Record]:
+        """Open one connection and yield a record per event until it ends."""
         headers = {
             "Accept": "text/event-stream",
             "User-Agent": self._user_agent,

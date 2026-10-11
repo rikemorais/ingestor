@@ -21,6 +21,7 @@ class PricePrinter:
     """A Sink that prints the live BTC-USD price from each ticker message."""
 
     def write(self, record: Record) -> None:
+        """Handle the record."""
         try:
             event = json.loads(record.value)
         except json.JSONDecodeError:
@@ -33,15 +34,18 @@ class PricePrinter:
         print(f"BTC-USD  ${price}  (last trade {size} {side})")
 
     def close(self) -> None:
+        """Release any resources."""
         pass
 
 
 def run() -> int:
+    """Build the pipeline and run the ingestion."""
     source = WebSocketSource(URL, subscribe=SUBSCRIBE, origin="coinbase")
     return ingest(source, PricePrinter())
 
 
 def main() -> None:
+    """Run the example from the command line."""
     print("Streaming Live BTC-USD Price (Ctrl+C to Stop)\n")
     try:
         run()

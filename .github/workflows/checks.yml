@@ -26,6 +26,8 @@ jobs:
         run: uv run --group dev ruff check .
       - name: Ruff format
         run: uv run --group dev ruff format --check .
+      - name: Docstring coverage
+        run: uv run --group dev interrogate
 
   types:
     name: types
