@@ -15,9 +15,7 @@ class JsonFieldsConsoleSink:
     def write(self, record: Record) -> None:
         try:
             payload = json.loads(record.value)
-            values = " ".join(
-                f"{field}={payload.get(field, '-')}" for field in self._fields
-            )
+            values = " ".join(f"{field}={payload.get(field, '-')}" for field in self._fields)
             print(values)
         except (TypeError, json.JSONDecodeError):
             print(record.value)

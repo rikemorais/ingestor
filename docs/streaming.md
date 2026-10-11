@@ -108,9 +108,7 @@ from ingestor.adapters.kafka import KafkaConnection, KafkaConnectionInfo
 from ingestor.adapters.ws import WebSocketSource
 from ingestor.app import ingest
 
-connection = KafkaConnection(
-    KafkaConnectionInfo(brokers=["localhost:9092"], topics=["btc"])
-)
+connection = KafkaConnection(KafkaConnectionInfo(brokers=["localhost:9092"], topics=["btc"]))
 source = WebSocketSource(
     "wss://ws-feed.exchange.coinbase.com",
     subscribe={"type": "subscribe", "product_ids": ["BTC-USD"], "channels": ["ticker"]},

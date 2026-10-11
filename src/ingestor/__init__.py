@@ -1,4 +1,4 @@
-"""Ingestor: reads data from many sources (streaming, batch, micro-batch) and writes it to destinations.
+"""Ingestor: read records from sources (streaming, batch, micro-batch) and write them to sinks.
 
 Organized as ports & adapters:
 - `ports`: Source, Sink, Connection and the Record domain model.
@@ -7,4 +7,9 @@ Organized as ports & adapters:
 - `cli`: the Composition Root.
 """
 
-__version__ = "0.1.0"
+from importlib.metadata import PackageNotFoundError, version
+
+try:
+    __version__ = version("data-ingestor")
+except PackageNotFoundError:  # pragma: no cover - only when running uninstalled
+    __version__ = "0.0.0"

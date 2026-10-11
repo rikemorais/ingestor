@@ -35,6 +35,7 @@ This is how you plug a new tool into your own project:
 from collections.abc import Iterator
 from ingestor.ports.record import Record
 
+
 class RangeSource:
     def __init__(self, count: int) -> None:
         self._count = count

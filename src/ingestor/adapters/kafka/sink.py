@@ -34,9 +34,7 @@ class KafkaSink:
         """
         topic = record.origin or self._default_topic
         if topic is None:
-            raise ValueError(
-                "No destination topic: set record.origin or default_topic."
-            )
+            raise ValueError("No destination topic: set record.origin or default_topic.")
         self._producer.produce(topic, value=record.value, key=record.key)
         self._producer.poll(0)
 

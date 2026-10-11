@@ -29,9 +29,7 @@ TOPIC = "btc-ticks"
 
 
 def run(limit: int | None = None) -> int:
-    connection = KafkaConnection(
-        KafkaConnectionInfo(brokers=["localhost:9092"], topics=[TOPIC])
-    )
+    connection = KafkaConnection(KafkaConnectionInfo(brokers=["localhost:9092"], topics=[TOPIC]))
     source = WebSocketSource(URL, subscribe=SUBSCRIBE, origin=TOPIC)
     sink = TeeSink(
         [

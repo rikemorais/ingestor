@@ -11,7 +11,6 @@ from ingestor.adapters.batch import FileSource
 from ingestor.adapters.kafka import KafkaInfoCluster
 from ingestor.app import ingest
 from ingestor.ports import Record
-
 from ingestor.testing import FakeConnection, ListSource, MemorySink
 
 

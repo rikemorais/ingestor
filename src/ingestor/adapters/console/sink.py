@@ -19,10 +19,7 @@ class ConsoleSink:
             record: The record to print.
         """
         if self._include_metadata:
-            print(
-                f"Ingested: Origin({record.origin}) "
-                f"Key({record.key}) Value: {record.value}"
-            )
+            print(f"Ingested: Origin({record.origin}) Key({record.key}) Value: {record.value}")
         else:
             print(record.value)
 
