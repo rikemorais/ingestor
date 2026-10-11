@@ -66,7 +66,7 @@ class WebSocketSource:
                     file=sys.stderr,
                 )
             if not self._reconnect:
-                break
+                break  # pragma: no cover - _stream_once only returns by raising
             if self._running:
                 time.sleep(self._reconnect_delay)
 

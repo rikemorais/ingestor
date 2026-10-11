@@ -17,3 +17,9 @@ wheels/
 
 # MkDocs Build Output
 site/
+
+# Testes e cobertura
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
