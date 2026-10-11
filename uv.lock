@@ -309,6 +309,67 @@ wheels = [
 ]
 
 [[package]]
+name = "data-ingestor"
+source = { editable = "." }
+dependencies = [
+    { name = "confluent-kafka" },
+]
+
+[package.optional-dependencies]
+sse = [
+    { name = "httpx" },
+]
+ws = [
+    { name = "websocket-client" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "httpx" },
+    { name = "mypy" },
+    { name = "ruff" },
+    { name = "websocket-client" },
+]
+docs = [
+    { name = "mkdocs-glightbox" },
+    { name = "mkdocs-material" },
+    { name = "mkdocstrings", extra = ["python"] },
+]
+test = [
+    { name = "httpx" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "websocket-client" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "confluent-kafka", specifier = ">=2.15.0" },
+    { name = "httpx", marker = "extra == 'sse'", specifier = ">=0.27" },
+    { name = "websocket-client", marker = "extra == 'ws'", specifier = ">=1.8" },
+]
+provides-extras = ["sse", "ws"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "mypy", specifier = ">=1.11" },
+    { name = "ruff", specifier = ">=0.8" },
+    { name = "websocket-client", specifier = ">=1.8" },
+]
+docs = [
+    { name = "mkdocs-glightbox", specifier = ">=0.4" },
+    { name = "mkdocs-material", specifier = ">=9.5" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.26" },
+]
+test = [
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "pytest", specifier = ">=8.3" },
+    { name = "pytest-cov", specifier = ">=5.0" },
+    { name = "websocket-client", specifier = ">=1.8" },
+]
+
+[[package]]
 name = "ghp-import"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -373,68 +434,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f5/08/8eea9d4b8302028f3abb2c0813953f7aec26d33b7a8960ed760e65ff29fa/idna-3.20.tar.gz", hash = "sha256:a7db850025b95ded1eae8a46181a1a6c56c92c96f0e2b005d9ff8dc0210cab44", size = 216463, upload-time = "2026-09-17T14:11:04.752Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl", hash = "sha256:ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c", size = 69583, upload-time = "2026-09-17T14:11:03.168Z" },
-]
-
-[[package]]
-name = "ingestor"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "confluent-kafka" },
-]
-
-[package.optional-dependencies]
-sse = [
-    { name = "httpx" },
-]
-ws = [
-    { name = "websocket-client" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "httpx" },
-    { name = "mypy" },
-    { name = "ruff" },
-    { name = "websocket-client" },
-]
-docs = [
-    { name = "mkdocs-glightbox" },
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-]
-test = [
-    { name = "httpx" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "websocket-client" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "confluent-kafka", specifier = ">=2.15.0" },
-    { name = "httpx", marker = "extra == 'sse'", specifier = ">=0.27" },
-    { name = "websocket-client", marker = "extra == 'ws'", specifier = ">=1.8" },
-]
-provides-extras = ["sse", "ws"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "mypy", specifier = ">=1.11" },
-    { name = "ruff", specifier = ">=0.8" },
-    { name = "websocket-client", specifier = ">=1.8" },
-]
-docs = [
-    { name = "mkdocs-glightbox", specifier = ">=0.4" },
-    { name = "mkdocs-material", specifier = ">=9.5" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.26" },
-]
-test = [
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "pytest", specifier = ">=8.3" },
-    { name = "pytest-cov", specifier = ">=5.0" },
-    { name = "websocket-client", specifier = ">=1.8" },
 ]
 
 [[package]]

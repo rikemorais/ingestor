@@ -7,4 +7,9 @@ Organized as ports & adapters:
 - `cli`: the Composition Root.
 """
 
-__version__ = "0.1.0"
+from importlib.metadata import PackageNotFoundError, version
+
+try:
+    __version__ = version("data-ingestor")
+except PackageNotFoundError:  # pragma: no cover - only when running uninstalled
+    __version__ = "0.0.0"
