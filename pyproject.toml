@@ -1,6 +1,6 @@
 [project]
-name = "ingestor"
-version = "0.1.0"
+name = "data-ingestor"
+dynamic = ["version"]
 description = "Data ingestion (streaming, batch, micro-batch) with a ports-and-adapters architecture"
 requires-python = ">=3.14"
 dependencies = [
@@ -61,8 +61,16 @@ exclude_lines = [
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+# PyPI rejects local version labels (the "+g<hash>" suffix), so drop them; dev
+# builds become e.g. 0.1.1.dev5, which TestPyPI and PyPI accept.
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ingestor"]
