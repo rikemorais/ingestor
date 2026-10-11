@@ -35,6 +35,9 @@ dev = [
 
 [tool.ruff]
 line-length = 100
+# Pinned below requires-python so the formatter keeps portable, explicit syntax
+# (e.g. parenthesized exception tuples), which 3.14's grammar would let it drop.
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

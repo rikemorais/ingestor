@@ -84,7 +84,7 @@ class WebSocketSource:
             while True:
                 frame = self._ws.recv()
                 if frame:
-                    text = frame if isinstance(frame, str) else frame.decode("utf-8")
+                    text = frame if isinstance(frame, str) else frame.decode("utf-8", "replace")
                     yield Record(value=text, origin=self._origin)
         finally:
             if self._ws is not None:
