@@ -71,6 +71,7 @@ class WebSocketSource:
                 time.sleep(self._reconnect_delay)
 
     def _stream_once(self) -> Iterator[Record]:
+        """Open one connection and yield a record per message until it ends."""
         self._ws = create_connection(self._url, timeout=self._open_timeout)
         try:
             if self._subscribe is not None:

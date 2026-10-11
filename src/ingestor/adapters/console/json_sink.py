@@ -10,9 +10,11 @@ class JsonFieldsConsoleSink:
     """Print selected JSON fields from each record."""
 
     def __init__(self, fields: Iterable[str]) -> None:
+        """Store the JSON field names to print."""
         self._fields = tuple(fields)
 
     def write(self, record: Record) -> None:
+        """Print the selected fields; fall back to the raw value if not JSON."""
         try:
             payload = json.loads(record.value)
             values = " ".join(f"{field}={payload.get(field, '-')}" for field in self._fields)
@@ -21,4 +23,5 @@ class JsonFieldsConsoleSink:
             print(record.value)
 
     def close(self) -> None:
+        """No-op: there is nothing to flush."""
         pass

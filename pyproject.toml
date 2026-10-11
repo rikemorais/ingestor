@@ -30,6 +30,8 @@ test = [
 dev = [
     "ruff>=0.8",
     "mypy>=1.11",
+    "interrogate>=1.7",
+    "pre-commit>=3.8",
     "httpx>=0.27",
     "websocket-client>=1.8",
 ]
@@ -41,7 +43,20 @@ line-length = 100
 target-version = "py313"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+select = ["E", "F", "I", "UP", "B", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"] # tests do not require docstrings
+"examples/**" = ["D"] # runnable demos, not library API
+
+[tool.interrogate]
+fail-under = 100
+exclude = ["tests", "examples", "docs"]
+ignore-init-module = false
+verbose = 1
 
 [tool.mypy]
 ignore_missing_imports = true
