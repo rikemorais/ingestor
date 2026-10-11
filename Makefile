@@ -11,7 +11,7 @@ install:
 sync: install
 
 reinstall:
-	uv sync --reinstall-package ingestor
+	uv sync --reinstall-package data-ingestor
 
 run:
 	PYTHONPATH=src uv run python -m ingestor

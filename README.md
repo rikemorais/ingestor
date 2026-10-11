@@ -84,7 +84,7 @@ uv run python -m unittest discover -v
 
 They exercise the same `ingest` function with a `FakeConnection` and with a `FileSource` (batch) - proving in practice that the logic does not depend on the Kafka lib.
 
-> Tip: when adding/moving files under `src/`, if `uv run` complains about a module not found, run once `uv sync --reinstall-package ingestor`.
+> Tip: when adding/moving files under `src/`, if `uv run` complains about a module not found, run once `uv sync --reinstall-package data-ingestor`.
 
 ## Stop Kafka
 

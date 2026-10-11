@@ -61,7 +61,7 @@ They exercise the same `ingest` function with a `FakeConnection` and with a
 
 !!! tip
     When adding or moving files under `src/`, if `uv run` complains about a
-    module not found, run once: `uv sync --reinstall-package ingestor`.
+    module not found, run once: `uv sync --reinstall-package data-ingestor`.
 
 ## Stop Kafka
 

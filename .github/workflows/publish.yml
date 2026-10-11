@@ -3,13 +3,7 @@ name: Publish
 on:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Where to publish"
-        type: choice
-        options: [testpypi, pypi]
-        default: testpypi
+  workflow_dispatch: {} # manual runs publish to TestPyPI only
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -27,7 +21,16 @@ jobs:
         with:
           enable-cache: true
       - run: uv python install 3.14
-      - run: uv build
+      - name: Lint
+        run: |
+          uv run --group dev ruff check .
+          uv run --group dev ruff format --check .
+      - name: Types
+        run: uv run --group dev --extra sse --extra ws mypy src/ingestor
+      - name: Tests
+        run: uv run --group test --extra sse --extra ws pytest
+      - name: Build
+        run: uv build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
@@ -36,7 +39,7 @@ jobs:
   pypi:
     name: pypi
     needs: build
-    if: github.event_name == 'release' || inputs.target == 'pypi'
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -48,12 +51,12 @@ jobs:
         with:
           name: dist
           path: dist/
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: pypa/gh-action-pypi-publish@a892a5a61159132606e93a2fa6f4358831b04d26 # v1.14.2
 
   testpypi:
     name: testpypi
     needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.target == 'testpypi'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: testpypi
@@ -65,6 +68,6 @@ jobs:
         with:
           name: dist
           path: dist/
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: pypa/gh-action-pypi-publish@a892a5a61159132606e93a2fa6f4358831b04d26 # v1.14.2
         with:
           repository-url: https://test.pypi.org/legacy/
