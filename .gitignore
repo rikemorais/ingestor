@@ -18,7 +18,7 @@ wheels/
 # MkDocs Build Output
 site/
 
-# Testes e cobertura
+# Tests and coverage
 .coverage
 .coverage.*
 htmlcov/
