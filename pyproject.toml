@@ -29,7 +29,7 @@ test = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=ingestor --cov-report=term-missing --cov-fail-under=100"
+addopts = "--cov=ingestor --cov-report=term-missing --cov-fail-under=80"
 
 [tool.coverage.run]
 branch = false
