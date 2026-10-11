@@ -39,9 +39,7 @@ def patch_connect(monkeypatch, sockets):
         created.append(ws)
         return ws
 
-    monkeypatch.setattr(
-        "ingestor.adapters.ws.source.create_connection", factory
-    )
+    monkeypatch.setattr("ingestor.adapters.ws.source.create_connection", factory)
     return created
 
 

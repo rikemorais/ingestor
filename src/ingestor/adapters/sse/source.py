@@ -75,9 +75,7 @@ class SSESource:
             "Accept": "text/event-stream",
             "User-Agent": self._user_agent,
         }
-        with httpx.Client(
-            timeout=httpx.Timeout(self._connect_timeout, read=None)
-        ) as client:
+        with httpx.Client(timeout=httpx.Timeout(self._connect_timeout, read=None)) as client:
             self._client = client
             with client.stream("GET", self._url, headers=headers) as response:
                 response.raise_for_status()
@@ -94,9 +92,9 @@ class SSESource:
                             data = []
                             event_id = None
                     elif line.startswith("data:"):
-                        data.append(line[len("data:"):].lstrip())
+                        data.append(line[len("data:") :].lstrip())
                     elif line.startswith("id:"):
-                        event_id = line[len("id:"):].strip()
+                        event_id = line[len("id:") :].strip()
                     # comment (":...") and other fields (event:, retry:) fall through
         self._client = None
 
